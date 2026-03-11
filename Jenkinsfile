@@ -28,9 +28,9 @@ pipeline {
         stage("Tag & Push to DockerHub") {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'docker') {
-                        sh "docker tag starbucks megheshrahangdale/starbucksnew:latest"
-                        sh "docker push megheshrahangdale/starbucksnew:latest"
+                    withDockerRegistry(credentialsId: 'docker')  {
+                        sh "docker tag starbucks megheshrahangdale/starbucks:latest"
+                        sh "docker push megheshrahangdale/starbucks:latest"
                     }
                 }
             }
